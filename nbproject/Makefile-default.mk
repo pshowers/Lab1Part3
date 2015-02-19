@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=leds.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c timer.c lcd.c
+SOURCEFILES_QUOTED_IF_SPACED=leds.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c timer.c lcd.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/leds.o ${OBJECTDIR}/_ext/1009865618/InitSW.o ${OBJECTDIR}/_ext/1009865618/main.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/lcd.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/leds.o.d ${OBJECTDIR}/_ext/1009865618/InitSW.o.d ${OBJECTDIR}/_ext/1009865618/main.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/lcd.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/leds.o ${OBJECTDIR}/_ext/1009865618/InitSW.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/_ext/1009865618/lab1p3.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/leds.o.d ${OBJECTDIR}/_ext/1009865618/InitSW.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/lcd.o.d ${OBJECTDIR}/_ext/1009865618/lab1p3.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/leds.o ${OBJECTDIR}/_ext/1009865618/InitSW.o ${OBJECTDIR}/_ext/1009865618/main.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/lcd.o
+OBJECTFILES=${OBJECTDIR}/leds.o ${OBJECTDIR}/_ext/1009865618/InitSW.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/lcd.o ${OBJECTDIR}/_ext/1009865618/lab1p3.o
 
 # Source Files
-SOURCEFILES=leds.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c timer.c lcd.c
+SOURCEFILES=leds.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c timer.c lcd.c /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c
 
 
 CFLAGS=
@@ -96,13 +96,6 @@ ${OBJECTDIR}/_ext/1009865618/InitSW.o: /Users/phillipshowers/Documents/SCHOOL/EC
 	${MP_CC} $(MP_EXTRA_CC_PRE)  /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c  -o ${OBJECTDIR}/_ext/1009865618/InitSW.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1009865618/InitSW.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1009865618/InitSW.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/_ext/1009865618/main.o: /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1009865618" 
-	@${RM} ${OBJECTDIR}/_ext/1009865618/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1009865618/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c  -o ${OBJECTDIR}/_ext/1009865618/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1009865618/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1009865618/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/timer.o: timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/timer.o.d 
@@ -116,6 +109,13 @@ ${OBJECTDIR}/lcd.o: lcd.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/lcd.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  lcd.c  -o ${OBJECTDIR}/lcd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/lcd.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/lcd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1009865618/lab1p3.o: /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1009865618" 
+	@${RM} ${OBJECTDIR}/_ext/1009865618/lab1p3.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1009865618/lab1p3.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c  -o ${OBJECTDIR}/_ext/1009865618/lab1p3.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1009865618/lab1p3.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1009865618/lab1p3.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/leds.o: leds.c  nbproject/Makefile-${CND_CONF}.mk
@@ -132,13 +132,6 @@ ${OBJECTDIR}/_ext/1009865618/InitSW.o: /Users/phillipshowers/Documents/SCHOOL/EC
 	${MP_CC} $(MP_EXTRA_CC_PRE)  /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c  -o ${OBJECTDIR}/_ext/1009865618/InitSW.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1009865618/InitSW.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1009865618/InitSW.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/_ext/1009865618/main.o: /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1009865618" 
-	@${RM} ${OBJECTDIR}/_ext/1009865618/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1009865618/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c  -o ${OBJECTDIR}/_ext/1009865618/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1009865618/main.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1009865618/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/timer.o: timer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/timer.o.d 
@@ -152,6 +145,13 @@ ${OBJECTDIR}/lcd.o: lcd.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/lcd.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  lcd.c  -o ${OBJECTDIR}/lcd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/lcd.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/lcd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1009865618/lab1p3.o: /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1009865618" 
+	@${RM} ${OBJECTDIR}/_ext/1009865618/lab1p3.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1009865618/lab1p3.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  /Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c  -o ${OBJECTDIR}/_ext/1009865618/lab1p3.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1009865618/lab1p3.o.d"        -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1009865618/lab1p3.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

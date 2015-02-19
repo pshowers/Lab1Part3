@@ -132,7 +132,7 @@ void printStringLCD(const char* s)
     
     int i = 0;
 
-    while( s[i] != 0)
+    while( s[i] != '\0')
     {
        printCharLCD(s[i]);
        i ++;
@@ -152,15 +152,18 @@ void clearLCD()
  */
 void moveCursorLCD(unsigned char x, unsigned char y)
 {
-unsigned char ddAddress = 0;
+int ddAddress = 0x80;
+ddAddress = ddAddress + y;
 
-if( y == 1)
+if( x == 1)
 {
-    ddAddress = 0x40 | x;
+    ddAddress = ddAddress + 0x40;
 }
- writeLCD(ddAddress,LCD_WRITE_CONTROL, 40);
+
+    writeLCD(ddAddress,LCD_WRITE_CONTROL, 40);
+// writeLCD(ddAddress,LCD_WRITE_CONTROL, 40);
 /*NOTE: If the above IF statement does not work, the commented section below will work for where to set the cursor.*/
-//    writeLCD(0xC0,LCD_WRITE_CONTROL, 40); //This will move the cursor to the second row for the Timer display.
+    writeLCD(0xC0,LCD_WRITE_CONTROL, 40); //This will move the cursor to the second row for the Timer display.
 }
 
 /*
@@ -168,6 +171,7 @@ if( y == 1)
  */
 void lcdRunState()
 {
+    clearLCD();
     printStringLCD("Running:");
 }
 
@@ -176,6 +180,7 @@ void lcdRunState()
  */
 void lcdStopState()
 {
+    clearLCD();
     printStringLCD("Stopped:");
 }
 
@@ -184,8 +189,16 @@ void lcdStopState()
  * and display the time of the stopwatch on the LCD. Then it will increment the correct
  * time after each .01 second.
  */
-void getTimeString()
+void getTimeString(int minTens, int min, int secTens, int sec, int tenth, int hundredth)
 {
     moveCursorLCD(1,0);
-    printStringLCD("%d:%d:%d%d");
+    printCharLCD('0' + minTens);
+    printCharLCD('0' + min);
+    printCharLCD(':');
+    printCharLCD('0' + secTens);
+    printCharLCD('0' + sec);
+    printCharLCD(':');
+    printCharLCD('0' + tenth);
+    printCharLCD('0' + hundredth);
+
 }

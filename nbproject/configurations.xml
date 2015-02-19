@@ -19,9 +19,9 @@
                    projectFiles="true">
       <itemPath>leds.c</itemPath>
       <itemPath>/Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/InitSW.c</itemPath>
-      <itemPath>/Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/main.c</itemPath>
       <itemPath>timer.c</itemPath>
       <itemPath>lcd.c</itemPath>
+      <itemPath>/Users/phillipshowers/Documents/SCHOOL/ECE372/Lab1p3-team209.X/lab1p3.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -167,6 +167,7 @@
         <property key="save-temps" value="false"/>
       </C30Global>
       <PICkit3PlatformTool>
+        <property key="firmware.download.all" value="false"/>
       </PICkit3PlatformTool>
     </conf>
   </confs>
