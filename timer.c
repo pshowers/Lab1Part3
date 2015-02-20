@@ -47,7 +47,9 @@ void delayMs(unsigned int delay)
     while(IFS0bits.T1IF == 0);
 
     IFS0bits.T1IF = 0; // Put the flag down afterwards.
-    T1CONbits.TON = 0; // Turn the timer off so it does not keep counting.
+//    T1CONbits.TON = 0; // Turn the timer off so it does not keep counting.
+    unsigned int prVal = (FCY*TIME_DELAY)/PRE_SCALAR - 1; //Calcs PR val
+    PR1 = prVal; //Sets PR1 to the calculated value based on a given time delay
 }
 
 /*****************************************************************

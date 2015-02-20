@@ -1,10 +1,11 @@
 // ******************************************************************************************* //
 //
-// File:         main.c
+// File:         lab1p3.c
 // Date:
-// Authors: 
+// Authors: Phillip Showers, Miguel Garcia, Angel Lopez
 //
-// Description: Part 3 for lab 1
+// Description: Part 3 for lab 1. This shows the status of a process (Running: or Stopped: and displays the amount
+//                                of time that has elapsed.
 // ******************************************************************************************* //
 
 #include "p24fj64ga002.h"
@@ -33,18 +34,20 @@ typedef enum stateTypeEnum
 {
     //TODO: Define states by name
     run,
-    stop,
-    delay
-
+    stop
 } stateType;
 
+/*These variables are used to count time in the T1_ISR. These will be updated and displayed on the lcd*/
 volatile int minute = 0;
 volatile int minuteTens = 0;
 volatile int second = 0;
 volatile int secondTens = 0;
 volatile int tenthSecond = 0;
 volatile int hundredthSecond = 0;
+
 volatile stateType CurrState = 0;
+volatile int displayOnce = 0;   //This variable is used for limiting the amount of times
+                                //the lcd is continually displaying the Runnind:/Stopped: and the time.
 
 
 // ******************************************************************************************* //
@@ -57,7 +60,7 @@ int main(void)
     initSW2();
     initTimer1();
     CurrState = run;
-    lcdRunState();
+//    lcdRunState();
 
     while(1)
     {
@@ -67,10 +70,19 @@ int main(void)
         {
             case run:
             TurnOnLED(RUN);
+            if (displayOnce < 10){
+                lcdRunState();
+                displayOnce++;
+            }
             getTimeString(minuteTens, minute, secondTens, second, tenthSecond, hundredthSecond);
             break;
 
             case stop:
+            if (displayOnce < 10){
+            lcdStopState();
+            displayOnce++;
+            getTimeString(minuteTens, minute, secondTens, second, tenthSecond, hundredthSecond);
+            }
             TurnOnLED(STOP);
             break;
         }
@@ -81,73 +93,44 @@ int main(void)
 
 void _ISR _CNInterrupt(void)
 {
-    //TODO: Implement the interrupt to capture the press of the button
     IFS1bits.CNIF = 0;  //Put flag down
-    if(PORTBbits.RB2 == RELEASED)
+
+    /*This function will toggle the LEDs between the RUN and STOP state.
+     There is a 5 msecond delay on every press and release.
+     */
+    if(TOGGLE_SW == PRESSED)
     {
+        displayOnce = 0;
         if(CurrState == run)
         {
-//            displayOnce = 0;
-            delayMs(5);
             CurrState = stop;
-            lcdStopState();
         }
         else if(CurrState == stop)
         {
-//            displayOnce = 0;
-            delayMs(5);
             CurrState = run;
-            lcdRunState();
         }
     }
-    if(PORTBbits.RB2 == PRESSED)
-    {
-        delayMs(5);
-    }
-//    //TODO: Implement the interrupt to capture the press of the button
-//    IFS1bits.CNIF = 0;  //Put flag down
-//
-//    /*This function will toggle the LEDs between the RUN and STOP state.
-//     There is a 5 msecond delay on every press and release.
-//     */
-//    if(TOGGLE_SW == PRESSED)
-//    {
-//        delayMs(5); //Makes a 5 msecond delay on every button press.
-//    }
-//    if(TOGGLE_SW == RELEASED)
-//    {
-//        if(CurrState == run)
-//        {
-//            delayMs(5);
-//            CurrState = stop;
-//        }
-//        else if(CurrState == stop)
-//        {
-//            delayMs(5);
-//            CurrState = run;
-//        }
-//    }
 
     /*
      * This IF statement will reset the timer if the switch on the microcontroller is pressed.
      * It will only reset if the LED toggle switch is also released.
      */
-//    if((RESET_SW == PRESSED) && (TOGGLE_SW == RELEASED))
-//    {
-//        delayMs(5);  //Makes a 5 msecond delay on every button press.
-//
-//        if(CurrState == stop)
-//        {
-//            TMR1 = 0; //According to the datasheet this should be reset automatically, but it does not sometimes.
-//            IFS0bits.T1IF = 0; // Put the flag down afterwards.
-//            T1CONbits.TON = 0; // Turn the timer off so it does not keep counting.
-///*This resets all of the values for the time if the reset button is pressed.*/
-//            minute = 0;
-//            second = 0;
-//            tenthSecond = 0;
-//            hundredthSecond = 0;
-//        }
-//    }
+    if((RESET_SW == PRESSED) && (TOGGLE_SW == RELEASED))
+    {
+
+        if(CurrState == stop)
+        {
+/*This resets all of the values for the time if the reset button is pressed.*/
+            minuteTens = 0;
+            minute = 0;
+            secondTens = 0;
+            second = 0;
+            tenthSecond = 0;
+            hundredthSecond = 0;
+            CurrState == stop;
+            displayOnce = 0;
+        }
+    }
 
 }
 
@@ -190,9 +173,4 @@ void _ISR _T1Interrupt(void)
         }
        
     }
-    else if(CurrState == stop)
-    {
-        getTimeString(minuteTens, minute, secondTens, second, tenthSecond, hundredthSecond);    //Access the function that shows the timer.
-    }
-    
 }
