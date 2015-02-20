@@ -34,21 +34,19 @@
  */
 void writeFourBits(unsigned char word, unsigned int commandType, unsigned int delayAfter, unsigned int lower)
 {
+    /*This will take the bottom 4 bits of char word and store them to the top 4 bits of LATB
+    * i.e. LATB15, LATB14, LATB13, LATB12
+    */
     if(lower)
     {
-        LATBbits.LATB15 = (word & 0x08) >> 3;
-        LATBbits.LATB14 = (word & 0x04) >> 2;
-        LATBbits.LATB13 = (word & 0x02) >> 1;
-        LATBbits.LATB12 = (word & 0x01);
+        LATB = (word << 12);
     }
     else
     {
-
-
-        LATBbits.LATB15 = (word & 0x80) >> 7;
-        LATBbits.LATB14 = (word & 0x40) >> 6;
-        LATBbits.LATB13 = (word & 0x20) >> 5;
-        LATBbits.LATB12 = (word & 0x10) >> 4;
+    /*This will take the bottom 4 bits of char word and store them to the top 4 bits of LATB
+     * i.e. LATB15, LATB14, LATB13, LATB12
+     */
+        LATB = (word >> 4) << 12;
     }
     LCD_RS = commandType; delayUs(1);
     LCD_E = 1;  delayUs(1); //minimum 230 ns
@@ -61,7 +59,6 @@ void writeFourBits(unsigned char word, unsigned int commandType, unsigned int de
  */
 void writeLCD(unsigned char word, unsigned int commandType, unsigned int delayAfter)
 {
-    //TODO:
     writeFourBits(word, commandType, delayAfter, UPPER);
     writeFourBits(word, commandType, delayAfter, LOWER);
 }
@@ -70,25 +67,24 @@ void writeLCD(unsigned char word, unsigned int commandType, unsigned int delayAf
  */
 void printCharLCD(char c)
 {
-    //TODO:
     writeLCD(c, LCD_WRITE_DATA, 46);
 }
+
 /*Initialize the LCD
  */
 void initLCD(void)
 {
     // Setup D, RS, and E to be outputs (0).
-
     TRIS_RS = 0;    //Sets RS to be output
     TRIS_E = 0;     //Sets Enable to be output
     TRIS_D7 = 0;
     TRIS_D6 = 0;
     TRIS_D5 = 0;
     TRIS_D4 = 0;
+
     // Initilization sequence utilizes specific LCD commands before the general configuration
     // commands can be utilized. The first few initilition commands cannot be done using the
     // WriteLCD function. Additionally, the specific sequence and timing is very important.
-
     delayUs(1500);
 
     writeFourBits(0x03, LCD_WRITE_CONTROL, 4100, LOWER);
@@ -103,12 +99,10 @@ void initLCD(void)
 
     // TODO: Display On/Off Control
         // Turn Display (D) Off
-
     writeLCD(0x08,LCD_WRITE_CONTROL, 40);
 
     // TODO: Clear Display (The delay is not specified in the data sheet at this point.
     //You really need to have the clear display delay here.
-
     writeLCD(0x01,LCD_WRITE_CONTROL, 1640);
 
     // TODO: Entry Mode Set
@@ -128,8 +122,9 @@ void initLCD(void)
  */
 void printStringLCD(const char* s)
 {
-    //TODO:
-    
+    /*This function prints the current array element of char* s and prints it to the lcd using printCharLCD.
+     It then increments the array element and prints it.
+     */
     int i = 0;
 
     while( s[i] != '\0')
@@ -146,7 +141,6 @@ void clearLCD()
 {
     writeLCD(0x01,LCD_WRITE_CONTROL, 1640);
 }
-
 /*
  Use the command for changing the DD RAM address to put the cursor somewhere.
  */
@@ -154,13 +148,12 @@ void moveCursorLCD(unsigned char x, unsigned char y)
 {
 int ddAddress = 0x80;
 ddAddress = ddAddress + y;
-
+/*This adds 0x80 to the*/
 if( x == 1)
 {
     ddAddress = ddAddress + 0x40;
 }
-
-    writeLCD(ddAddress,LCD_WRITE_CONTROL, 40);
+   writeLCD(ddAddress,LCD_WRITE_CONTROL, 40);
 // writeLCD(ddAddress,LCD_WRITE_CONTROL, 40);
 /*NOTE: If the above IF statement does not work, the commented section below will work for where to set the cursor.*/
     writeLCD(0xC0,LCD_WRITE_CONTROL, 40); //This will move the cursor to the second row for the Timer display.

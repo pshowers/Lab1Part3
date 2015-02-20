@@ -1,6 +1,6 @@
 /*
  * File:   timer.c
- * Authors:
+ * Authors: Phillip Showers, Miguel Garcia, Angel Lopez
  *
  * Created on December 30, 2014, 8:07 PM
  */
@@ -23,14 +23,12 @@
     IFS0bits.T2IF = 0; // Timer 2 interrupt flag down
     T2CONbits.TON = 1; // Turn timer 2 on
 
-
     // Wait until the timer 1 interrupt flag goes up. This is done in hardware.
     while(IFS0bits.T2IF == 0);
 
     IFS0bits.T2IF = 0; // Put the flag down afterwards.
     T2CONbits.TON = 0; // Turn the timer off so it does not keep counting.
 }
-
 
 /* Delay 1 millisecond * the input (delay)
  */
@@ -42,10 +40,8 @@ void delayMs(unsigned int delay)
     IFS0bits.T1IF = 0; // Timer 2 interrupt flag down
     T1CONbits.TON = 1; // Turn timer 2 on
 
-
     // Wait until the timer 1 interrupt flag goes up. This is done in hardware.
     while(IFS0bits.T1IF == 0);
-
     IFS0bits.T1IF = 0; // Put the flag down afterwards.
 //    T1CONbits.TON = 0; // Turn the timer off so it does not keep counting.
     unsigned int prVal = (FCY*TIME_DELAY)/PRE_SCALAR - 1; //Calcs PR val
@@ -62,8 +58,6 @@ void delayMs(unsigned int delay)
 
 void initTimer1()
 {
-    //TODO: Initialize the timer
-
     unsigned int prVal = (FCY*TIME_DELAY)/PRE_SCALAR - 1; //Calcs PR val
     PR1 = prVal; //Sets PR1 to the calculated value based on a given time delay
 
